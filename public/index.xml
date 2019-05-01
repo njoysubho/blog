@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sabyasachi Bhattacharya</title>
+    <link>https://example.com/</link>
+    <description>Recent content on Sabyasachi Bhattacharya</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 01 May 2019 18:56:02 +0200</lastBuildDate>
+    
+	<atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Start Journey for a modern application development</title>
+      <link>https://example.com/posts/modern-development/</link>
+      <pubDate>Wed, 01 May 2019 18:56:02 +0200</pubDate>
+      
+      <guid>https://example.com/posts/modern-development/</guid>
+      <description>The technology landscape for developers is changing rapidly. From monolith applications to microservices, from an application deployed on-premise datacenter to cloud platform, also applications deployed on virtualized machines to the containerized environment, the shift is huge. As a developer, it is important to keep up to date with this changing landscape both upgrading oneself as well as looking for a new job. As there are a plethora of technologies and there are always much hype and evangelism around a new technology it is always good to start with a much stable language, framework, and tool.</description>
+    </item>
+    
+  </channel>
+</rss>
