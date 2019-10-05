@@ -1,9 +1,8 @@
 ---
-title: "Log TraceId Micronaut"
-date: 2019-10-05T09:46:54+02:00
+title: "Traceid Logging with Micronaut"
+date: 2019-10-05T10:58:51+02:00
 draft: false
 ---
-
 Distributed tracing is must have when we create our microservices . Frameworks like Spring Boot,Micronaut comes with the support of creating TraceId,SpanId and propagate to visualization tools like Zipkin,Jaegar . 
 This post shortly describe what we need to add in order to log the TraceId in application or access log . Logging traceId helps us in correlating the logs . 
 For logging I have used Slf4j with logback . In micronaut support for generating TraceId comes quite easily just matter of adding proper dependencies which can be found here https://guides.micronaut.io/micronaut-microservices-distributed-tracing-zipkin/guide/index.html . However to log the same traceId we need to have a Tracing Bean like following 
