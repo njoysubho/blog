@@ -1,7 +1,7 @@
 title = "Sabyasachi Bhattacharya"
 baseURL = "https://njoysubho.github.io"
 languageCode = "en-us"
-theme = "gohugo-theme-ananke"
+theme = "ananke"
 
 
 MetaDataFormat = "yaml"
@@ -10,6 +10,7 @@ SectionPagesMenu = "main"
 Paginate = 3 # this is set low for demonstrating with dummy content. Set to a higher number
 googleAnalytics = ""
 enableRobotsTXT = true
+publishDir = "public"
 
 [sitemap]
   changefreq = "monthly"
