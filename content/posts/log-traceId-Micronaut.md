@@ -1,7 +1,7 @@
 ---
 title: "Log TraceId Micronaut"
 date: 2019-10-05T09:46:54+02:00
-draft: true
+draft: false
 ---
 
 Distributed tracing is must have when we create our microservices . Frameworks like Spring Boot,Micronaut comes with the support of creating TraceId,SpanId and propagate to visualization tools like Zipkin,Jaegar . 
