@@ -20,11 +20,18 @@ In order to explore more about deploying on ECS using terraform and github actio
    
    The log show something interesting it seems task cannot connect to ECR endpoint. This was clearly pointing now some issue with subnet and its connectivity to internet. I start looking into security groups for the task and it was all fine permitting OUTBOUND internet traffic. Next I looked into Subnet route table here I can see it is a public subnet routing internet traffic to internet gateway. Then why task can't reach ECR ?? . Below is where the answer lies
 
-```
-1.    If you're running a task using an Amazon Elastic Compute Cloud (Amazon EC2) launch type and your container instance is in a private subnet, or if you're running a task using the AWS Fargate launch type in a private subnet, confirm that your subnet has a route to a NAT gateway in the route table.
 
-2.    If you're running your task using an Amazon Elastic Compute Cloud (Amazon EC2) launch type and your container instance is in a public subnet, confirm that the instance has a public IP address. Or, if you're running a task using the Fargate launch type in a public subnet, choose ENABLED for Auto-assign public IP when you launch the task. This allows your task to have outbound network access to pull an image.
-```
+1.    If you're running a task using an Amazon Elastic Compute Cloud (Amazon EC2) launch type 
+      and your container instance is in a private subnet, or if you're running a task using the 
+      AWS Fargate launch type in a private subnet,confirm that your subnet has a route to a NAT gateway
+      in the route table.
+
+2.    If you're running your task using an Amazon Elastic Compute Cloud (Amazon EC2) launch type and your container
+      instance is in a public subnet, confirm that the instance has a public IP address. 
+      Or, if you're running a task using the Fargate launch type in a public subnet, 
+      choose ENABLED for Auto-assign public IP when you launch the task. 
+ This allows your task to have outbound network access to pull an image.
+
 I am running my task with FARGATE launch type but didn't want to assign public IP to tasks. 
  So solution was to 
  - Deploy a NAT Gateway.
