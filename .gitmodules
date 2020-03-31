@@ -1,8 +1,8 @@
 
 [submodule "public"]
 	path = public
-	url = git://github.com/njoysubho/njoysubho.github.io.git
+	url = git@github.com:njoysubho/blog.git
 	branch = master
 [submodule "themes/ananke"]
 	path = themes/ananke
-	url = git://github.com/budparr/gohugo-theme-ananke.git
+	url = git@github.com:budparr/gohugo-theme-ananke.git
