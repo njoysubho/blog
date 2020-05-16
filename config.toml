@@ -3,7 +3,7 @@ baseURL = "https://njoysubho.github.io"
 languageCode = "en-us"
 theme = "ananke"
 
-
+staticDir = ["static"]
 MetaDataFormat = "yaml"
 DefaultContentLanguage = "en"
 SectionPagesMenu = "main"
