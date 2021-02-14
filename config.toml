@@ -7,7 +7,7 @@ staticDir = ["static"]
 MetaDataFormat = "yaml"
 DefaultContentLanguage = "en"
 SectionPagesMenu = "main"
-Paginate = 3 # this is set low for demonstrating with dummy content. Set to a higher number
+Paginate = 6 # this is set low for demonstrating with dummy content. Set to a higher number
 googleAnalytics = ""
 enableRobotsTXT = true
 publishDir = "public"
@@ -19,7 +19,7 @@ publishDir = "public"
 
 [params]
   favicon = ""
-  description = "The last theme you'll ever need. Maybe."
+  description = "Java|Spring and More"
   facebook = ""
   twitter = "https://twitter.com/sabz2301"
   instagram = ""
