@@ -1,7 +1,10 @@
 ---
 title: "Resilience4j, the path beyond Hystrix"
 date: 2021-03-08T08:39:44+01:00
-draft: true
+draft: false
+description: Using Resilience4j to implement common resiliency patterns
+keywords: "Resilience4j, microservices, circuit breaker, resiliency"
+featured_image: "/retry-featured.png"
 ---
 
 
@@ -10,18 +13,18 @@ draft: true
 In discussions of cloud-native applications or microservices, the theme that takes a center stage is Resiliency. Hystrix from Netflix OSS has been the go-to library for developers to implement resiliency patterns, in many cases, it's integration with other application frameworks like Spring, Micronaut has made the developer life easier. However, Hystrix has been put into maintenance mode and Spring cloud 2020.0.0 (aka Ilford) has stopped its support for Hystrix. This is a huge change, what's the migration path ahead, what is the alternative? A quick look into the Hystrix GitHub repo readme gives us a hint, I paste an excerpt from that.
 
 ```
-Hystrix is no longer in active development and is currently
+ Hystrix is no longer in active development and is currently
  in maintenance mode.
-
-  Hystrix (at version 1.5.18) is stable enough to meet the needs
-  of Netflix for our existing applications. Meanwhile, our focus
-  has shifted towards more adaptive implementations that react to 
-  an application’s real-time performance rather than pre-configured
-  settings (for example, through adaptive concurrency limits). 
-  For the cases where something like Hystrix makes sense,
-  we intend to continue using Hystrix for existing applications and 
-  to leverage open and active projects 
-  like resilience4j for new internal projects. We are beginning to recommend others do the same.
+ Hystrix (at version 1.5.18) is stable enough to meet the needs
+ of Netflix for our existing applications. Meanwhile, our focus
+ has shifted towards more adaptive implementations that react to 
+ an application’s real-time performance rather than pre-configured
+ settings (for example, through adaptive concurrency limits). 
+ For the cases where something like Hystrix makes sense,
+ we intend to continue using Hystrix for existing applications and 
+ to leverage open and active projects 
+ like resilience4j for new internal projects. We are beginning 
+ to recommend others do the same.
 ```
 I will talk about Resilience4j in the post. However this is of course not the only alternative, other alternatives include `Spring Cloud Circuitbreaker`, `Sentinel`, `Spring Retry` or if you want to move the whole phenomenon of resiliency from application's responsibility to infrastructure then we can look at service meshes (though meshes are a different story altogether and they are much bigger than only resiliency).
 
@@ -64,7 +67,7 @@ To show how it works I have created a demo application that consists of two serv
 
 **Threadpool Bulkhead**
 
-Let's start with the thread pool bulkhead. In r4j-serviceB an endpoint `sayHello` is setup which will be called. In r4j-serviceA side calling method is decorated like below 
+Let's start with the thread pool bulkhead. In r4j-serviceB an endpoint `reply` is setup which will be called. In r4j-serviceA side calling method is decorated like below 
 
 ```
 @Bulkhead(name = "serviceB#getReply", type = Bulkhead.Type.THREADPOOL)
@@ -117,7 +120,7 @@ We see at some point number of threads used reaches maximum thread configured, a
 
 Another type of bulkheading is the Semaphore bulkhead, here instead of a separate thread pool per downstream call, we define maximum permissible calls per downstream.
 
-To demonstrate this pattern, I created an endpoint in r4j-serviceB `/v1/semaphore-bulkhead` which will be called by r4j-serviceA.
+To demonstrate this pattern, I have created an endpoint in r4j-serviceB `/v1/semaphore-bulkhead` which will be called by r4j-serviceA.
 The caller method is decorated as below -
 
 ```

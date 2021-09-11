@@ -13,9 +13,10 @@ enableRobotsTXT = true
 publishDir = "public"
 
 [sitemap]
-  changefreq = "monthly"
+  changefreq = "weekly"
   priority = 0.5
   filename = "sitemap.xml"
+
 
 [params]
   favicon = ""
