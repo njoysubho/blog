@@ -6,11 +6,17 @@ theme = "ananke"
 staticDir = ["static"]
 MetaDataFormat = "yaml"
 DefaultContentLanguage = "en"
-SectionPagesMenu = "main"
 Paginate = 6 # this is set low for demonstrating with dummy content. Set to a higher number
-googleAnalytics = ""
+googleAnalytics = "G-M4SBK7LW3B"
 enableRobotsTXT = true
 publishDir = "public"
+
+[menu]
+  [[menu.main]]
+  identifier = "posts"
+  name = "Posts"
+  url = "/posts/"
+  weight = 1
 
 [sitemap]
   changefreq = "weekly"
@@ -33,3 +39,4 @@ publishDir = "public"
   background_color_class = "bg-black"
   featured_image = "/images/gohugo-default-sample-hero-image.jpg"
   recent_posts_number = 2
+  env = "production"
