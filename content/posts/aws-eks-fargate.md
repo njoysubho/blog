@@ -2,6 +2,7 @@
 title: "Deploy EKS Kubernetes Cluster with fargate"
 date: 2020-05-16T15:42:39+02:00
 draft: false
+categories: ["Cloud and infrastructure"]
 ---
 
 EKS is managed kubernetes service by AWS. This post will describe networking setup for EKS cluster.
@@ -15,16 +16,16 @@ We will see network configuration about public-private scheme. Below is the conc
 ![Network img](/k8s-eks.png)
 
 
-## What is  EKS fargate cluster- 
+## What is  EKS fargate cluster-
 
 EKS is a managed service where AWS manage the control plane (master nodes) while users have choice to either to manage their own nodes (EC2 instances)
 or use Fargate which is a serverless solution where worker nodes are provisioned by AWS automatically.
 To use fargate we need a fargate profile a profile is a combination of kubernetes namespaces and labels inside them, deployment done with matching
-namespace and labels(if any) will be scheduled by fargate provisioned node. 
+namespace and labels(if any) will be scheduled by fargate provisioned node.
 
-## Deploy  is using eksctl 
+## Deploy  is using eksctl
 
-```eksctl create cluster --name my-cluster --version 1.16 --fargate``` 
+```eksctl create cluster --name my-cluster --version 1.16 --fargate```
 
 This will create a VPC with 3 AZs and each AZs having 1 public and 1 private subnet.
 We can add options to the above command for example we can define vpc cidr by specifying --vpc-cidr .
@@ -33,13 +34,13 @@ We can also use existing subnets to be used rather than creating new one.
 This command will also create fargate profile for default and kube-system namespace. As we see above it is important to create a fargate profile with proper
 namespace to get the pods scheduled.
 
-At this point a working cluster should be ready we can use kubectl to deploy pods. To config kubectl use 
+At this point a working cluster should be ready we can use kubectl to deploy pods. To config kubectl use
 
 ``` aws eks --region region update-kubeconfig --name cluster_name```
 
 ## Pitfall
 
-When I created my own cluster I see despite my cluster state was active I see core-dns pods in kube-system namespace were not deployed and in 
+When I created my own cluster I see despite my cluster state was active I see core-dns pods in kube-system namespace were not deployed and in
 a pending state. While I run `kubectl describe pods <cordns pod>` I see it is defined to be provisioned on ec2 and fargate unable to provision it.
 
 Solution
@@ -61,7 +62,7 @@ Run the command below this will patch coredns deployment to run using fargate.
 3. Creates a  NAT Gateway in the VPC.
 4. Attaches private subnets to NAT GW so that worker nodes can access   internet but not nodes are not accessible from internet.
 
-## Cost calculation 
+## Cost calculation
 
 Region eu-west-1
 

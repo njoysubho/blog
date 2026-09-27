@@ -2,6 +2,7 @@
 title: "Deploy model with FastAPI and Heroku"
 date: 2022-03-15T20:40:35+01:00
 draft: false
+categories: ["AI and developer tools"]
 ---
 
 In this blog we will see how we can deploy our model with FastAPI and Heroku. Below technologies will be used:
@@ -53,11 +54,11 @@ The complete code can be found [here](https://github.com/njoysubho/fastapi-dog-c
 
 Now that we have our model and the FastApi service we can now deploy it.
 
-### The Deployment. 
+### The Deployment.
 First an application need to be created on heroku. I named the application `dog-cat-fastapi`.
 We can upload the whole code as zip and heroku will automatically deploy the code, however I decided to use docker image as I also wanted to run the code locally.
 
-The dockerFile looks like 
+The dockerFile looks like
 ```
 FROM ubuntu:20.04
 
@@ -72,7 +73,7 @@ RUN python3 -m pip --no-cache-dir install --upgrade pip && \
     python3 --version && \
     pip3 --version
 # pip install aws cli
-RUN pip3 install awscli 
+RUN pip3 install awscli
 ARG MODEL_NAME
 ARG AWS_ACCESS_ID
 ARG AWS_ACCESS_SECRET
@@ -86,20 +87,20 @@ COPY requirements.txt .
 
 RUN pip3 install --no-cache-dir --upgrade -r /code/requirements.txt
 
-COPY ./app /code/app 
+COPY ./app /code/app
 
 EXPOSE $PORT
 
 CMD gunicorn -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT app.main:app
 ```
-A few things to notice here - 
+A few things to notice here -
 
 * `RUN aws s3 cp s3://datascience-sab/${MODEL_NAME}.pth .` command will pull the model file from S3 bucket.
-* In order to access aws S3 it needs credential, for this worklfow we are passing the credential from github secret and set those in ENV. 
+* In order to access aws S3 it needs credential, for this worklfow we are passing the credential from github secret and set those in ENV.
 * When I first deployed the app I could not connect to it , turned out that Heroku does not support the `EXPOSE` command and it sets the random port as env variable named `PORT`an we can use that to expose the port. the belo command will make the app avilable in  the port
 `CMD gunicorn -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT app.main:app`
 
-Finally we make our github workflow below is the step to deploy on heroku 
+Finally we make our github workflow below is the step to deploy on heroku
 
 ```
 ....
@@ -113,18 +114,18 @@ Finally we make our github workflow below is the step to deploy on heroku
     - name: Release
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:release web --app=${{ secrets.HEROKU_APP_NAME }}  
+      run: heroku container:release web --app=${{ secrets.HEROKU_APP_NAME }}
 ```
 we pass app name, secrets the model name as build args to `heroku container:push` command.
 After this we use `heroku container:release` command to release the app.
 The complete github workflow can be found [here](https://github.com/njoysubho/fastapi-dog-cat/blob/main/.github/workflows/build-release-deploy.yml).
 
-With this we can deploy our app to heroku. 
+With this we can deploy our app to heroku.
 
 Below are some improvements that can be done
 
 * Enhance the model .
-* Introduce model versioning. 
+* Introduce model versioning.
 * Improved logging, tracing and metrics for the service.
 * Also clean up docker image and stream line all RUN and pip commands.
 

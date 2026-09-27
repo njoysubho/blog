@@ -2,6 +2,7 @@
 title: "Exploring the AWS Serverless MCP Server"
 date: 2025-06-09T11:42:14+02:00
 draft: false
+categories: ["AI and developer tools"]
 ---
 
 AWS has recently introduced the MCP server for AWS Serverless. You can read the official announcement [here](https://aws.amazon.com/blogs/compute/introducing-aws-serverless-mcp-server-ai-powered-development-for-modern-applications/).

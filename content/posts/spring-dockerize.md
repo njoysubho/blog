@@ -2,9 +2,10 @@
 title: "Spring Dockerize"
 date: 2022-04-16T10:22:24+02:00
 draft: false
+categories: ["Platform and reliability"]
 ---
 
-In my previous post we saw how to create a simple spring boot application which actually does nothing much. I also touched about how to package that as jar file and run locally. However currently in production environment docker is hugely adopted. In this post we will see how to dockerize our spring boot application. 
+In my previous post we saw how to create a simple spring boot application which actually does nothing much. I also touched about how to package that as jar file and run locally. However currently in production environment docker is hugely adopted. In this post we will see how to dockerize our spring boot application.
 
 ## First Step, just works
 
@@ -34,15 +35,15 @@ CMD ["java","-jar","app.jar"]
 ```
 We create a new image by running `docker build -t spring-first-web-app:1.0.0` and then we run our application by running `docker run  spring-first-web-app:1.0.0`.
 So far so good. We see application starting up.
-![docker1](/static/spring-first-web-app-docker1.png)
+![docker1](/spring-first-web-app-docker1.png)
 
 ## First Improvement
 
 While the above image works just fine, we can see some issues. First one is of size.
 If we run `docker images spring-first-web-app:1.0.0` we see that the image is about 1 GB.
-![docker1-size](/static/spring-first-web-app-docker1-size.png)
+![docker1-size](/spring-first-web-app-docker1-size.png)
 This is huge for a an application which has basically nothing.
-First thing we can do to move to a smaller base image. 
+First thing we can do to move to a smaller base image.
 
 ```docker
 FROM openjdk:17
@@ -64,7 +65,7 @@ We moved to a new base image. OpenJDK which is the open source branch of Java pr
 
 Now when we build our image we can see that the size is reduced to about 600MB
 
-![docker2](/static/spring-first-web-app-docker2.png)
+![docker2](/spring-first-web-app-docker2.png)
 See the image tagged 2.0.0 .
 
 ```info
@@ -72,7 +73,7 @@ There is also another base image available which is based on alpine linux. Gener
 ```
 
 ## Second Improvement
-Can we do better ? If we follow carefully we have two stage , in first stage we download maven and compile our java source code. In second stage we run our packaged application. Once we have our packaged application we do not need anymore mvn and JDK . All we need is a JRE. 
+Can we do better ? If we follow carefully we have two stage , in first stage we download maven and compile our java source code. In second stage we run our packaged application. Once we have our packaged application we do not need anymore mvn and JDK . All we need is a JRE.
 Here comes the idea of multistage docker build. In a multistage docker build we can pick and chose artifacts from previous stages and throw away anything from all previous stages.
 Below is how we can do this.
 
@@ -97,23 +98,23 @@ CMD ["java","-jar","app.jar"]
 ```
 In the above docker file we have two stages. First stage `build` is build stage. In build stage we download maven and compile our java source code. In second stage `production` we run our packaged application. Learn more about multistage docker build from https://docs.docker.com/develop/develop-images/multistage-build/ .
 
-Let's see how much is the docker size now - 
+Let's see how much is the docker size now -
 
-![multistage](/static/spring-first-web-app-multi-stage.png)
+![multistage](/spring-first-web-app-multi-stage.png)
 
-We see a huge reduction in size. Point to note here is I have moved to a different base image. Reason is , for production stage I want a JRE only image. However for newer version of Java the upsteam OpenJDK project didn't produce anymore JREs hence there is no JRE only image. There are a lot of discussion in github about this. For example see https://github.com/docker-library/openjdk/issues/468 . 
+We see a huge reduction in size. Point to note here is I have moved to a different base image. Reason is , for production stage I want a JRE only image. However for newer version of Java the upsteam OpenJDK project didn't produce anymore JREs hence there is no JRE only image. There are a lot of discussion in github about this. For example see https://github.com/docker-library/openjdk/issues/468 .
 
-There is also another provider Adoptium (previously known as AdoptopenJDK) which under their version of Java called Temurin still provides a JRE image. You can find a nice article about their decision https://blog.adoptium.net/2021/12/eclipse-temurin-jres-are-back/ . Hence I moved to using temurin. 
+There is also another provider Adoptium (previously known as AdoptopenJDK) which under their version of Java called Temurin still provides a JRE image. You can find a nice article about their decision https://blog.adoptium.net/2021/12/eclipse-temurin-jres-are-back/ . Hence I moved to using temurin.
 
 ## Are there still room for improvements ?
 
-Indeed! though not much about size(Well you can try some distroless image).But I would like to focus on below two topic - 
+Indeed! though not much about size(Well you can try some distroless image).But I would like to focus on below two topic -
 
-* Spring Layered image 
+* Spring Layered image
 * Spring Buildpack .
 
-Spring buildpack provides support for creating image for spring application without needing to write Dockerfile I have alteady written a post about this https://dev.to/sabyasachi/buildpack-with-spring-boot-300o . This also touched a little about layering. 
+Spring buildpack provides support for creating image for spring application without needing to write Dockerfile I have alteady written a post about this https://dev.to/sabyasachi/buildpack-with-spring-boot-300o . This also touched a little about layering.
 
-In a separate posts I will explain how to create a spring layered image. 
+In a separate posts I will explain how to create a spring layered image.
 
-So, that's it from this post. We now know how to create a bare minimum spring application and how to create an image. 
+So, that's it from this post. We now know how to create a bare minimum spring application and how to create an image.

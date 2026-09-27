@@ -10,4 +10,4 @@ draft: true
 
 - Producrer extends and consumer super
 
-- PE -> so that we bound the upper limit 
+- PE -> so that we bound the upper limit

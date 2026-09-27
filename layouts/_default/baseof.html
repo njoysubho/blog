@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{ $description := .Description | default .Site.Params.description }}
+  <meta name="description" content="{{ $description }}">
+  <link rel="canonical" href="{{ .Permalink }}">
+  <meta property="og:type" content="{{ if eq .Section "posts" }}article{{ else }}website{{ end }}">
+  <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }} — Engineering, AI systems & independent building{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}">
+  <meta property="og:description" content="{{ $description }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta name="theme-color" content="#f8f7f3">
+  <title>{{ if .IsHome }}{{ .Site.Title }} — Engineering, AI systems & independent building{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/site.css">
+  {{ with .OutputFormats.Get "RSS" }}<link rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" href="{{ .RelPermalink }}">{{ end }}
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="container header-inner">
+    <a class="brand" href="/">Sabyasachi B.</a>
+    <nav aria-label="Main navigation"><a href="/#work">Work</a><a href="/#writing">Writing</a><a href="/#experience">Experience</a><a href="/#contact">Contact</a></nav>
+  </div></header>
+  <main id="main">{{ block "main" . }}{{ end }}</main>
+  <footer class="site-footer container"><span>© {{ now.Format "2006" }} Sabyasachi Bhattacharya</span><div><a href="{{ .Site.Params.linkedin }}">Contact</a><a href="/posts/index.xml">RSS</a></div></footer>
+</body>
+</html>
