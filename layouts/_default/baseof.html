@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{ $description := .Description | default .Site.Params.description }}
+  <meta name="description" content="{{ $description }}">
+  <link rel="canonical" href="{{ .Permalink }}">
+  <meta property="og:type" content="{{ if eq .Section "posts" }}article{{ else }}website{{ end }}">
+  <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }} — Engineering, AI systems & independent building{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}">
+  <meta property="og:description" content="{{ $description }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta name="theme-color" content="#f8f7f3">
+  <title>{{ if .IsHome }}{{ .Site.Title }} — Engineering, AI systems & independent building{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/site.css">
+  {{ with .OutputFormats.Get "RSS" }}<link rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" href="{{ .RelPermalink }}">{{ end }}
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="container header-inner">
+    <a class="brand" href="/" aria-label="Sabyasachi Bhattacharya, home"><span class="brand-mark">SB<span class="brand-dot">.</span></span><span class="brand-name">Sabyasachi<br>Bhattacharya</span></a>
+    <nav class="desktop-nav" aria-label="Main navigation"><a href="/work/">Work</a><a href="/writing/">Writing</a><a href="/cv/">CV</a><a href="/about/">About</a></nav>
+    <a class="header-contact" href="{{ .Site.Params.linkedin }}" target="_blank" rel="noopener noreferrer">Connect <span aria-hidden="true">↗</span></a>
+    <details class="mobile-nav"><summary aria-label="Open navigation">Menu <span aria-hidden="true">☰</span></summary><nav aria-label="Mobile navigation"><a href="/work/">Work</a><a href="/writing/">Writing</a><a href="/cv/">CV</a><a href="/about/">About</a><a href="{{ .Site.Params.linkedin }}">Connect ↗</a></nav></details>
+  </div></header>
+  <main id="main">{{ block "main" . }}{{ end }}</main>
+  <footer class="site-footer"><div class="container footer-grid"><div><span class="eyebrow">The next conversation</span><h2>Let's build something useful.</h2><p>Platform engineering, AI systems, or an idea worth testing—I'd like to hear about it.</p><a class="text-link light" href="{{ .Site.Params.linkedin }}" target="_blank" rel="noopener noreferrer">Connect on LinkedIn <span aria-hidden="true">↗</span></a></div><div class="footer-links"><a href="{{ .Site.Params.github }}" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="{{ .Site.Params.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="/posts/index.xml">RSS ↗</a><a href="/writing/">Writing ↗</a></div></div><div class="container footer-bottom"><span>© {{ now.Format "2006" }} Sabyasachi Bhattacharya</span><span>Built with care in Berlin.</span></div></footer>
+</body>
+</html>

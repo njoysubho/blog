@@ -2,19 +2,20 @@
 title: "Spring Boot Actuator Health Endpoint"
 date: 2021-07-19T23:11:10+02:00
 draft: false
+categories: ["Platform and reliability"]
 ---
 
 Health endpoint for a service exposes status of it's state. This state information is useful to determine whether the application is up and ready to accept requests. Normally when a service is fronted by a Load Balancer, the loadbalancer uses the information derived from the health endpoint to decide whether to route traffic to that instance of service or not.
-Spring Boot actuator provides Health Endpoint out of the box. If we add `spring-boot-actuator` dependency we can get the URI `/actuator/health`. 
+Spring Boot actuator provides Health Endpoint out of the box. If we add `spring-boot-actuator` dependency we can get the URI `/actuator/health`.
 
-The status of health endpoint is the aggregate of its components. Each Component is an instance of `HealthContributor`. Each 
-`HealthContributor` will either be an `HealthIndicator` or `CompositeHealthContributor`. 
+The status of health endpoint is the aggregate of its components. Each Component is an instance of `HealthContributor`. Each
+`HealthContributor` will either be an `HealthIndicator` or `CompositeHealthContributor`.
 
 First, let's see what are the default HealthIndicator that Spring Boot Actuator configures. To do that we add the following property in application.yml -
 
 `management.endpoint.health.show-details: always`
 
-Now if we do `curl localhost:8080/actuator/health | jq .` we get back 
+Now if we do `curl localhost:8080/actuator/health | jq .` we get back
 
 ```
 {
@@ -29,7 +30,7 @@ Now if we do `curl localhost:8080/actuator/health | jq .` we get back
   }
 }
 ```
-We see here `diskSpace` and `ping`, by default all the health endpoint does is to check if there are enough diskspace and the context is up. 
+We see here `diskSpace` and `ping`, by default all the health endpoint does is to check if there are enough diskspace and the context is up.
 
 The status of the health endpoint is the aggregate of its components. If any of the component is not in `UP` state, the health endpoint will be in `DOWN` state.
 
@@ -122,7 +123,7 @@ Individual health components can be grouped together , each of this group then c
 Let's create two new groups
 
 - default - it will have diskspace and ping components.
-- custom - it will have our custom alwaysUp and alwaysDown endpoints. 
+- custom - it will have our custom alwaysUp and alwaysDown endpoints.
 
 This time health endpoint one additonal property in reply is `group`
 
@@ -151,7 +152,7 @@ This time health endpoint one additonal property in reply is `group`
 }
 ```
 
-Upon accessing `/actuator/health/default` we get back 
+Upon accessing `/actuator/health/default` we get back
 
 ```
 {
@@ -197,7 +198,7 @@ Spring boot actuator provide this two group out of the box. To enable it we need
 
 `management.endpoint.health.probes.enabled: true`
 
-A request to health endpoint will return 
+A request to health endpoint will return
 
 ```
 {
@@ -232,9 +233,9 @@ A request to health endpoint will return
 ```
 Along side previous groups that we created , we see two new groups `liveness` and `readiness`
 
-We can request this individual group similarly as we did for our custom groups 
+We can request this individual group similarly as we did for our custom groups
 
-A request to `/actuator/health/liveness` will return 
+A request to `/actuator/health/liveness` will return
 
 ```
 {
@@ -247,11 +248,11 @@ We may wonder how liveness and readiness know when application is up and when it
 Both of this class gets the information of the service availability for a dependency named `ApplicationAvailability` .
 `ApplicationAvailability` is an interface and `ApplicationAvailabilityBean` is an implementation. `ApplicationAvailabilityBean` is also a listener for `AvailabilityChangeEvent`. Any event it receieves is stored in a map named `events`.
 
-Now there are other components in Spring which publishes Liveness and Readiness events. For example `EventPublishingRunListener` publishes a `LivenessState.CORRECT` event when the context is refreshed or application is started. Similarly when all the Applicationrunner is already run it publishes `ReadinessState.ACCEPTING_TRAFFIC`. Another example is in `ServletWebServerApplicationContext#doClose` method that publishes ` ReadinessState.REFUSING_TRAFFIC`. 
+Now there are other components in Spring which publishes Liveness and Readiness events. For example `EventPublishingRunListener` publishes a `LivenessState.CORRECT` event when the context is refreshed or application is started. Similarly when all the Applicationrunner is already run it publishes `ReadinessState.ACCEPTING_TRAFFIC`. Another example is in `ServletWebServerApplicationContext#doClose` method that publishes ` ReadinessState.REFUSING_TRAFFIC`.
 
 `ApplicationAvailabilityBean` recieves these messages and store it into the in memory map. Upon querying liveness and readiness endpoint we get the momentan status for liveness and readiness events.
 
-Lastly, ofcourse we can add our own custom HealthIndicator to any of the liveness and readiness group. However we have to be alert about what indicator we are adding. It is advisable to not include any external dependency related check in liveness indicator, because a momentan hiccup in the dependency can cause the service to get restarted, or kicked out from Loadbalancers list of services. 
+Lastly, ofcourse we can add our own custom HealthIndicator to any of the liveness and readiness group. However we have to be alert about what indicator we are adding. It is advisable to not include any external dependency related check in liveness indicator, because a momentan hiccup in the dependency can cause the service to get restarted, or kicked out from Loadbalancers list of services.
 
 Finally, spring boot also enables various other health indicators based on jars on classpath for example redis, datasource, elasticsearch and many more.
 

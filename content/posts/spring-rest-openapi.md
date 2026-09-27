@@ -2,17 +2,18 @@
 title: "Spring Rest Openapi"
 date: 2022-04-24T08:23:28+02:00
 draft: false
+categories: ["Platform and reliability"]
 ---
 
 Till now we have seen how to generate a new spring boot application and then how to containerize it. However our application till does not have any functionality. Today we will see how to create a REST API with Spring boot. However we will take a schema first approach and we will generate the REST API stub using the schema. This article will show how a OpenAPI specification looks like and how can we generate our REST API stub using the schema.
 
 ## OpenAPI Specification
 
-APIs are contract between the application and consumers of the application. These consumers can be machines or humans. OpenAPI is a specification to write your API contract in human and machine readable format. It standardizes the way we can describe our API. The entire specififaction can be found here `https://spec.openapis.org/oas/v3.1.0` . 
+APIs are contract between the application and consumers of the application. These consumers can be machines or humans. OpenAPI is a specification to write your API contract in human and machine readable format. It standardizes the way we can describe our API. The entire specififaction can be found here `https://spec.openapis.org/oas/v3.1.0` .
 
 ## Our First API Spec
 
-Let's create a new service, I call it `inventory-service`. We now know how to generate a new spring boot application. We add a yml openAPI spec file in `src/resources/spec/inventory-api.yml` . A minimal API can look as follows -  
+Let's create a new service, I call it `inventory-service`. We now know how to generate a new spring boot application. We add a yml openAPI spec file in `src/resources/spec/inventory-api.yml` . A minimal API can look as follows -
 
 ```yaml
 openapi: "3.0.3"
@@ -139,14 +140,14 @@ components:
         message:
           type: string
 ```
-It is a very minimal API . We can see in `paths` section we have description of our API. Each API endpoint has it's optional request body and response body. We can also define if some custom headers are required, path parameters , query parameters and so on. 
-In the `components` section we define our models and these are referenced in our API. 
+It is a very minimal API . We can see in `paths` section we have description of our API. Each API endpoint has it's optional request body and response body. We can also define if some custom headers are required, path parameters , query parameters and so on.
+In the `components` section we define our models and these are referenced in our API.
 
-I will not go deeper into the OpenAPI spec but because it is very vast but we can always consult the spec for our specific use case . 
+I will not go deeper into the OpenAPI spec but because it is very vast but we can always consult the spec for our specific use case .
 
 ## Generating REST API for Spring
 
-Now that we have our OpenAPI spec, there are plugins and tool available to generate code from our spec. We can use the `openapi-generator` https://openapi-generator.tech/docs/installation to generate our REST API. We can use cli to generate our REST API. 
+Now that we have our OpenAPI spec, there are plugins and tool available to generate code from our spec. We can use the `openapi-generator` https://openapi-generator.tech/docs/installation to generate our REST API. We can use cli to generate our REST API.
  However there is also a maven plugin https://github.com/OpenAPITools/openapi-generator/tree/master/modules/openapi-generator-maven-plugin which we will use to generate our source .
 
 The maven plugin uses the openapi-generator to generate the source code.
@@ -180,13 +181,13 @@ The maven plugin uses the openapi-generator to generate the source code.
         </execution>
     </executions>
 </plugin>
- 
- ``` 
+
+ ```
 
 
- Both the plugin and the actual openapi-generator has lot of config options we can check it from https://github.com/OpenAPITools/openapi-generator/tree/master/modules/openapi-generator-maven-plugin and https://openapi-generator.tech/docs/generators/spring. 
+ Both the plugin and the actual openapi-generator has lot of config options we can check it from https://github.com/OpenAPITools/openapi-generator/tree/master/modules/openapi-generator-maven-plugin and https://openapi-generator.tech/docs/generators/spring.
 
- In the above example I have used the bare minimum config . I will explain them below . 
+ In the above example I have used the bare minimum config . I will explain them below .
 
     * `inputSpec` - This is the path to the OpenAPI spec file.
     * `generatorName` - ooenapi-generator can produce source code multiple language and framework. Because we want to generate for Spring I chose spring as the generator name.
@@ -200,7 +201,7 @@ The maven plugin uses the openapi-generator to generate the source code.
        **   `skipDefaultInterface` - We can skip the genration of default methods in the interface.
        ** `openApiNullable` - With the value true it will generate an import of `org.openapitools.jackson.nullable.JsonNullable` however I didn't need it so I make it false.
 
-So what is the output of the above code ? Below is how our REST API stub looks like 
+So what is the output of the above code ? Below is how our REST API stub looks like
 
 ```java
 /**
@@ -287,7 +288,7 @@ public interface ProductsApi {
         produces = { "application/json" }
     )
     ResponseEntity<List<Product>> getAllProducts(
-        
+
     );
 
 
@@ -348,6 +349,6 @@ public interface ProductsApi {
 }
 ```
 
-Now we have our API interface , we can now create our controller and implement the methods. 
+Now we have our API interface , we can now create our controller and implement the methods.
 
-So that's it for this post, I will actually implement the API using tests so watch out for the next post. 
+So that's it for this post, I will actually implement the API using tests so watch out for the next post.

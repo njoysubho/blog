@@ -3,7 +3,7 @@ title: "Spring Buildpack"
 date: 2021-09-19T12:10:48+02:00
 draft: true
 ---
-Buildpacks are modular tool to create OCI compliant images for your application, without using Dockerfile. 
+Buildpacks are modular tool to create OCI compliant images for your application, without using Dockerfile.
 Before we see how Spring boot uses buildpack lets look into major components of buildpack and how they contribute in image building.
 * Builder -> This is itself is an image that builds the image for your application.
 * Buildpack -> A buildpack does the actual job of analysing your application code and contributes in image generation.
@@ -12,9 +12,9 @@ Each builder consists of multiple buildpacks. There are also some special buildp
 
 Spring uses Packeto buildpack which is an implementation of CNCF buildpack spec, and has it integrated with spring boot maven plugin.
 
-Let's see how to genarate a simple image from a spring boot application 
+Let's see how to genarate a simple image from a spring boot application
 
-Below is a simple pom build config which will generate an image 
+Below is a simple pom build config which will generate an image
 
 ```xml
 <build>
@@ -70,8 +70,8 @@ Pulling builder image 'docker.io/paketobuildpacks/builder:base' 100%
 [INFO]     [creator]         $BPL_JVM_THREAD_COUNT        250             the number of threads in memory calculation
 [INFO]     [creator]         $JAVA_TOOL_OPTIONS                           the JVM launch flags
 ```
-First notice an image `docker.io/paketobuildpacks/builder:base` is being pulled this is the builder component that we spoke earlier. 
-Next we see a section called `==> Detecting` this is where each buildpack available in the builder will participate. We see the line `5 of 18 buildpacks participating` which means only 5 buildpacks' detect code has informed that they can participate in creating an image for spring-boot application. 
+First notice an image `docker.io/paketobuildpacks/builder:base` is being pulled this is the builder component that we spoke earlier.
+Next we see a section called `==> Detecting` this is where each buildpack available in the builder will participate. We see the line `5 of 18 buildpacks participating` which means only 5 buildpacks' detect code has informed that they can participate in creating an image for spring-boot application.
 
 Here are the participating buildpacks
 
@@ -121,19 +121,19 @@ Let's create an image containing a graal native image instead of jar. To achieve
 </plugin>
 ```
 
-Two important customizations here 
+Two important customizations here
 
 - We are using a different builder `paketobuildpacks/builder:tiny` this will help create a distroless image suitable for graal native image type artifacts.
 - Second, we are passing an env variable `BP_NATIVE_IMAGE=true` which will instruct the builder to generate a graal native image.
 
-If we see the console log now , we will see 
+If we see the console log now , we will see
 
 ```
-INFO]     [creator]     paketo-buildpacks/graalvm         
+INFO]     [creator]     paketo-buildpacks/graalvm
 ```
 So instead of using `liberica-bellsoft` dist now builder will use graalvm dist.
 
-Let's now change the Java version, may be we want to use jdk 17 . we can use below configuration in plugin 
+Let's now change the Java version, may be we want to use jdk 17 . we can use below configuration in plugin
 
 ```xml
 <plugin>
@@ -167,10 +167,10 @@ We can customize the generated image name like below
 </plugin>
 ```
 
-For all the configuration see here https://github.com/spring-projects/spring-boot/blob/main/spring-boot-project/spring-boot-tools/spring-boot-maven-plugin/src/main/java/org/springframework/boot/maven/Image.java 
+For all the configuration see here https://github.com/spring-projects/spring-boot/blob/main/spring-boot-project/spring-boot-tools/spring-boot-maven-plugin/src/main/java/org/springframework/boot/maven/Image.java
 
-## How to change JDK 
-We may want to use a different JDK than bellsoft, in order to do that there must be a buildpack available for the choice of JDK . Let's say we want to use amazon corretto we need to configure as below 
+## How to change JDK
+We may want to use a different JDK than bellsoft, in order to do that there must be a buildpack available for the choice of JDK . Let's say we want to use amazon corretto we need to configure as below
 
 ```xml
 <plugin>
@@ -202,7 +202,7 @@ So what we see when we run build -
 
 ## JVM configuration
 
-In order to provide memory calculation buildpack uses some defaults 
+In order to provide memory calculation buildpack uses some defaults
 
 ```
 [INFO]     [creator]         $BPL_JVM_HEAD_ROOM           0               the headroom in memory calculation

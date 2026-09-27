@@ -2,6 +2,7 @@
 title: "The Rise of the Agentic Web"
 date: 2025-05-18T19:22:15+02:00
 draft: false
+categories: ["AI and developer tools"]
 ---
 
 # The Rise of the Agentic Web: From GenAI Applications to Inter-Agent Protocols
