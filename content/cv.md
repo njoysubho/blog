@@ -3,7 +3,7 @@ title: "CV"
 date: 2026-09-27T11:00:00+02:00
 draft: false
 kicker: "03 / Experience"
-description: "Engineering leader and hands-on technical lead with 13+ years across backend platforms, cloud systems, and AI developer experience."
+description: "Engineering leader and hands-on technical lead working across backend platforms, cloud systems, and AI developer experience."
 ---
 
 ## Sabyasachi Bhattacharya
@@ -20,7 +20,7 @@ Hands-on technical leadership for the Java platform and Agentic AI platform, inc
 
 ### Earlier experience
 
-Engineering and leadership roles across **DKB Code Factory, AUTO1 Group, VMware, SAS, and Accenture**. My work has included backend development, platform architecture, cloud systems, and guiding engineering teams. A dated role-by-role history and outcomes will be added after résumé verification.
+Engineering and leadership roles across **VMware, SAS, and Accenture**. My work has included backend development, platform architecture, cloud systems, and guiding engineering teams. A dated role-by-role history and outcomes will be added after résumé verification.
 
 ### Areas of practice
 
