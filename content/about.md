@@ -8,7 +8,7 @@ description: "I'm Sabyasachi Bhattacharya, a Berlin-based engineering lead and i
 
 I'm Sabyasachi, a software engineer and engineering leader based in Berlin. My work sits where platform engineering, developer tools, and AI systems meet.
 
-Over more than 13 years, I've moved between hands-on engineering and leading teams. I like understanding how things work below the abstraction, then turning that understanding into something other engineers can use. Today, my focus includes core Java services and internal agentic AI workflows at AUTO1 Group.
+Over more than 13 years, I've moved between hands-on engineering and leading teams. I like understanding how things work below the abstraction, then turning that understanding into something other engineers can use. Today, my focus includes the Java platform and Agentic AI platform at AUTO1 Group.
 
 Outside work, I'm building [ZMMR](https://zmmr.ai/), a product exploring how to make German property information easier for buyers to understand. I use independent projects to learn what happens when architecture meets real user behavior.
 

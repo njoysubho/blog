@@ -16,7 +16,7 @@ I lead and build software foundations for engineering teams. My experience spans
 ### Current focus
 
 **Team Lead, Software Engineering — AUTO1 Group**
-Hands-on technical leadership for core platform services, including authentication, shared Java libraries, and internal AI agent workflows. I work with teams to turn platform capabilities into reliable, usable tools.
+Hands-on technical leadership for the Java platform and Agentic AI platform, including authentication, shared Java libraries, and agents and workflows. I work with teams to turn platform capabilities into reliable, usable tools.
 
 ### Earlier experience
 

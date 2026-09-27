@@ -3,22 +3,22 @@ title: "Selected work"
 date: 2026-09-27T11:00:00+02:00
 draft: false
 kicker: "01 / Work"
-description: "Software platforms, AI workflows, and an independent product in progress."
+description: "Java platform, Agentic AI platform, and an independent product in progress."
 ---
 
-## Platform foundations {#platform}
+## Java platform {#platform}
 
 **Engineering leadership · Java · shared services · authentication**
 
-At AUTO1 Group, I work as a hands-on technical lead for a core platform team. The work spans authentication, shared Spring libraries, and services used by product engineers. A platform succeeds when teams can adopt it without slowing down, and when the people operating it understand its boundaries.
+At AUTO1 Group, I work as a hands-on technical lead for the Java platform. The work spans authentication, shared Spring libraries, and services used by product engineers. A platform succeeds when teams can adopt it without slowing down, and when the people operating it understand its boundaries.
 
 My focus is on clear interfaces, reliability, and developer experience: making the common path easier while leaving room for teams to solve their own product problems. Public technical details and outcomes will be added as they can be shared.
 
-## AI systems for real workflows {#agents}
+## Agentic AI platform {#agents}
 
 **Agentic systems · developer tools · evaluation**
 
-I'm working on the foundations for internal agents and workflows used across an engineering organization. That means thinking beyond a demo: what context an agent receives, how it uses tools, what happens when it fails, and how people can evaluate and trust the result.
+I'm building the Agentic AI platform: foundations for agents and workflows used across an engineering organization. That means thinking beyond a demo: what context an agent receives, how it uses tools, what happens when it fails, and how people can evaluate and trust the result.
 
 I write openly about the general ideas. Start with [spec-driven development](/posts/spec-driven-development/) and [setting up Claude Code](/posts/prep-for-claude/). This page will grow into a deeper public case study as I can share concrete evidence.
 

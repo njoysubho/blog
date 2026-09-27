@@ -1,21 +1,30 @@
 {{ define "main" }}
 <div class="container home">
   <section class="intro">
-    <p class="eyebrow">Engineering lead · Berlin</p>
-    <h1>Sabyasachi Bhattacharya</h1>
-    <p class="intro-summary">I build software platforms and practical AI systems.</p>
-    <p>I'm a hands-on technical lead at AUTO1 Group, working on Java platforms, developer experience, and internal agent workflows. Alongside my day job, I'm building ZMMR.</p>
-    <div class="intro-links"><a href="/cv/">CV</a><a href="{{ .Site.Params.github }}">GitHub</a><a href="{{ .Site.Params.linkedin }}">LinkedIn</a><a href="/about/">About me</a></div>
+    <p class="eyebrow"><span class="status-dot"></span> ENGINEERING LEAD & INDEPENDENT BUILDER · BERLIN</p>
+    <h1>Sabyasachi<br><em>Bhattacharya.</em></h1>
+    <p class="intro-summary">Software foundations. Agentic AI. Products of my own.</p>
+    <p>I'm a hands-on technical lead at AUTO1 Group, building the Java platform and Agentic AI platform. Outside work, I'm building ZMMR to help people make sense of German property documents.</p>
+    <div class="intro-links"><a class="primary-link" href="{{ .Site.Params.linkedin }}">Let's connect ↗</a><a href="#work">Explore my work ↓</a><a href="{{ .Site.Params.github }}">GitHub ↗</a></div>
   </section>
-  <section class="home-section">
-    <div class="section-heading"><h2>Selected work</h2><a href="/work/">View all</a></div>
-    <div class="project"><h3><a href="/work/#platform">Core engineering platform</a></h3><p>Authentication, shared Java libraries, and services for product teams.</p><span class="project-meta">AUTO1 Group · Platform engineering</span></div>
-    <div class="project"><h3><a href="/work/#agents">Internal AI workflows</a></h3><p>Tools and foundations for agents that support everyday engineering work.</p><span class="project-meta">AUTO1 Group · AI systems</span></div>
-    <div class="project"><h3><a href="/work/#zmmr">ZMMR</a></h3><p>Helping buyers understand German property documents and ask better questions.</p><span class="project-meta">Independent project · In progress</span></div>
+  <section id="experience" class="experience-strip" aria-label="Experience">
+    <div><strong>13+ years</strong><span>Building systems & leading teams</span></div>
+    <p>AUTO1 Group · DKB Code Factory · VMware · SAS · Accenture</p>
   </section>
-  <section class="home-section">
-    <div class="section-heading"><h2>Recent writing</h2><a href="/writing/">All writing</a></div>
-    <div class="article-list">{{ range first 3 (where .Site.RegularPages "Section" "posts") }}<a class="article-row" href="{{ .RelPermalink }}"><span class="article-date">{{ .Date.Format "Jan 2006" }}</span><span class="article-title">{{ .Title }}</span></a>{{ end }}</div>
+  <section id="work" class="home-section">
+    <div class="section-heading"><h2><span class="section-number">01</span> What I'm building</h2><span class="section-note">Platforms at work. Products outside it.</span></div>
+    <div class="platform-grid">
+      <article class="project"><span class="project-meta">AUTO1 GROUP / PLATFORM ENGINEERING</span><h3>Java platform</h3><p>Authentication, shared Spring libraries, and services that help product teams build on reliable foundations.</p><span class="project-tags">Java & Spring · Reliability · Developer experience</span></article>
+      <article class="project"><span class="project-meta">AUTO1 GROUP / AI SYSTEMS</span><h3>Agentic AI platform</h3><p>Foundations for agents and workflows across engineering: connecting tools, context, and the systems people use every day.</p><span class="project-tags">Agents · Tool integration · Engineering workflows</span></article>
+    </div>
+    <article class="featured-project"><div class="feature-label">INDEPENDENT PRODUCT <span>In progress</span></div><h3>ZMMR<span class="feature-arrow" aria-hidden="true">↗</span></h3><p>Understand the property.<br>Ask better questions.</p><div class="feature-bottom"><span>AI-assisted understanding of German property documents.<br>Building, testing, and learning from real buyers.</span><a href="https://zmmr.ai/">Explore ZMMR ↗</a></div></article>
   </section>
+  <section id="writing" class="home-section writing-section">
+    <div class="section-heading"><h2><span class="section-number">02</span> Notes from the work</h2><a href="/writing/">All writing ↗</a></div>
+    <p class="section-intro">Practical notes on AI, platforms, and what I learn while building.</p>
+    <div class="article-list">{{ range first 3 (where .Site.RegularPages "Section" "posts") }}<a class="article-row" href="{{ .RelPermalink }}"><span class="article-date">{{ .Date.Format "Jan 2006" }}</span><span class="article-title">{{ .Title }}</span><span class="article-arrow" aria-hidden="true">↗</span></a>{{ end }}</div>
+  </section>
+  <section id="about" class="home-section about-section"><div class="section-heading"><h2><span class="section-number">03</span> The way I work</h2><a href="/cv/">Full CV ↗</a></div><p>I work across architecture, implementation, and team leadership. I like going below the abstraction, understanding the tradeoffs, and turning that understanding into systems other people can use.</p><p class="about-detail">My experience spans backend engineering, distributed systems, cloud infrastructure, and developer tools. Today, I'm taking that foundation deeper into AI systems—and learning the product side by building something of my own.</p></section>
+  <section id="contact" class="contact-section"><p class="eyebrow">CONTINUE THE CONVERSATION</p><h2>Good work starts with a conversation.</h2><p>Interested in Java platforms, agentic AI, or building a product?</p><a class="primary-link" href="{{ .Site.Params.linkedin }}">Connect on LinkedIn ↗</a></section>
 </div>
 {{ end }}
